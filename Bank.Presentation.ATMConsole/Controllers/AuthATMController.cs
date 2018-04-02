@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank.Services
+namespace Bank.Presentation.ATMConsole.Controllers
 {
-    public class Class1
+    public class AuthATMController
     {
     }
 }
