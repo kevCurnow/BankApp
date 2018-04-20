@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bank.Data;
+using Bank.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,7 @@ namespace Bank.Presentation.ATMConsole.Controllers
 {
     public class MenuATMController
     {
+        
         public static void ShowStartMenu()
         {
             Console.Title = "ASCII Art";
@@ -119,6 +122,7 @@ namespace Bank.Presentation.ATMConsole.Controllers
                     var key = ShowAuthorizedAccountMenu();
                     int convertedKey = GetKeyFromConsole(key);
                     int transactionType = convertedKey;
+                    AccountService accountService = new AccountService();
                     //Menu Switch
                     switch (transactionType)
                     {
@@ -129,7 +133,7 @@ namespace Bank.Presentation.ATMConsole.Controllers
                             WithdrawalATMController.ProcessWithdrawal(accountNumber, transactionType);
                             break;
                         case 3:
-                            Console.WriteLine("Show transactions");
+                            Console.WriteLine($"Your balance is: {accountService.GetBalance(accountNumber)}");
                             break;
                         case 4:
                             Console.WriteLine("Assistance");

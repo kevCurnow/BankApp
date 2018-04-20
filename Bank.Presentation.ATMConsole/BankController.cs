@@ -12,10 +12,16 @@ namespace Bank.Presentation.ATMConsole
     {
         public static void RunATM()
         {
-            ////Create Customer from Console
+            Console.WriteLine("Do you have an account? Y for yes, N for no");
+            string signUp = Console.ReadLine();
+
+            if (signUp.ToUpper() == "N")
+            { 
+            //Create Customer from Console
             int ssn = CustomerATMController.NewCustomerSignUpQuestions();
             int customerId = CustomerATMController.GetCustomerIdSSNConsole(ssn);
             AccountATMController.CreateAccountConsole(customerId);
+            }
 
             //Start up
             Console.Clear();

@@ -54,13 +54,13 @@ namespace Bank.Services
             }
         }
 
-        public decimal GetBalance(string accountID)
+        public decimal GetBalance(string accountNumber)
         {
-            if (accountID == null)
+            if (accountNumber == null)
             {
                 throw new NotImplementedException();
             }
-            Account account = db.Accounts.Single(accountNumber => accountNumber.AccountNumber == accountID);
+            Account account = db.Accounts.Single(accountID => accountID.AccountNumber == accountNumber);
             if (account == null)
             {
                 throw new NotImplementedException();
