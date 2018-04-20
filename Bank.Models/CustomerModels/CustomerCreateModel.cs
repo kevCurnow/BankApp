@@ -10,6 +10,9 @@ namespace Bank.Models.CustomerModels
     public class CustomerCreateModel
     {
         [Required]
+        public int SocialSecurityNumber { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
 
         [Required]

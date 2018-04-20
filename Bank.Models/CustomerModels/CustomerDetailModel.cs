@@ -8,9 +8,9 @@ namespace Bank.Models.CustomerModels
 {
     public class CustomerDetailModel
     {
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime CreatedUtc { get; set; }
+        public DateTimeOffset CreatedUtc { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Bank.Contracts
 {
     public interface IAuth
     {
-        string HashPassword(string password);
-        bool ValidatePassword(string password, string hashedPassword);
+        string HashPin(string pin);
+        bool ValidatePin(string pin);
     }
 }

@@ -49,6 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankController.cs" />
+    <Compile Include="Controllers\AccountATMController.cs" />
+    <Compile Include="Controllers\AuthATMController.cs" />
+    <Compile Include="Controllers\CustomerATMController.cs" />
+    <Compile Include="Controllers\DepositATMController.cs" />
+    <Compile Include="Controllers\MenuATMController.cs" />
+    <Compile Include="Controllers\TransactionATMController.cs" />
+    <Compile Include="Controllers\WithdrawalATMController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

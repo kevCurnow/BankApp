@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bank.Contracts;
 using Bank.Models.DepositModels;
+using Bank.Data;
 
 namespace Bank.Services
 {
@@ -12,7 +13,16 @@ namespace Bank.Services
     {
         public bool CreateDeposit(DepositCreateModel model)
         {
-            throw new NotImplementedException();
+            using (var ctx = new BankEntities())
+            {
+                var entity = new Deposit
+                {
+                    TransactionID = model.TransactionID,
+                    Amount = model.Amount
+                };
+                ctx.Deposits.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
         }
 
         public DepositDetailModel GetDepositById(int id)

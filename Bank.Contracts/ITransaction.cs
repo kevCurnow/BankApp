@@ -9,8 +9,7 @@ namespace Bank.Contracts
 {
     public interface ITransaction
     {
-        bool CreateTransaction(TransactionCreateModel model);
-        TransactionDetailModel GetTransactionById(int id);
+        int CreateTransaction(TransactionCreateModel model);
         IEnumerable<TransactionListItemModel> GetTransactions();
     }
 }

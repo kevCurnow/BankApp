@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="IAccount.cs" />
+    <Compile Include="IAuth.cs" />
+    <Compile Include="ICustomer.cs" />
+    <Compile Include="IDeposit.cs" />
+    <Compile Include="ITransaction.cs" />
+    <Compile Include="IWithdrawal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

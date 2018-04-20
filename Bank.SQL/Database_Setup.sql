@@ -14,7 +14,7 @@ GO
 
 IF EXISTS(SELECT * from sys.databases WHERE name='Bank')  
 BEGIN  
-    DROP DATABASE Bank;  
+	DROP DATABASE Bank;  
 END  
 
 CREATE DATABASE Bank
@@ -28,47 +28,48 @@ GO
 -- --------------------------------------------------
 -- Creating table 'Customer'
 CREATE TABLE [dbo].[Customer] (
-    [CustomerID] int IDENTITY(1,1) NOT NULL,
-    [FirstName] nvarchar(25)  NOT NULL,
-    [LastName] nvarchar(25)  NOT NULL,
-    [CreatedUtc]    DATETIMEOFFSET (7) NOT NULL
+	[CustomerID] int IDENTITY(1,1) NOT NULL,
+	[SocialSecurityNumber] int NULL,
+	[FirstName] nvarchar(25)  NOT NULL,
+	[LastName] nvarchar(25)  NOT NULL,
+	[CreatedUtc]    DATETIMEOFFSET (7) NOT NULL
 );
 GO
 
 -- Creating table 'Account'
 CREATE TABLE [dbo].[Account] (
-    [AccountID] int IDENTITY(1,1) NOT NULL,
-    [AccountNumber] nvarchar(75)  NOT NULL,
-    [Pin] nvarchar(75)  NOT NULL,
-    [AccountType] int  NOT NULL,
-    [CustomerID] int  NOT NULL,
-    [Balance] money  NULL,
-    [CreatedUtc]    DATETIMEOFFSET (7) NOT NULL
+	[AccountID] int IDENTITY(1,1) NOT NULL,
+	[AccountNumber] nvarchar(75)  NOT NULL,
+	[Pin] nvarchar(75)  NOT NULL,
+	[AccountType] int  NOT NULL,
+	[CustomerID] int  NOT NULL,
+	[Balance] money  NULL,
+	[CreatedUtc]    DATETIMEOFFSET (7) NOT NULL
 );
 GO
 
 -- Creating table 'Transaction'
 CREATE TABLE [dbo].[Transaction] (
-    [TransactionID] int IDENTITY(1,1) NOT NULL,
-    [TransactionType] int  NOT NULL,
-    [AccountID] int  NOT NULL,
-    [CreatedUtc]    DATETIMEOFFSET (7) NOT NULL
+	[TransactionID] int IDENTITY(1,1) NOT NULL,
+	[TransactionType] int  NOT NULL,
+	[AccountID] int  NOT NULL,
+	[CreatedUtc]    DATETIMEOFFSET (7) NOT NULL
 );
 GO
 
 -- Creating table 'Deposit'
 CREATE TABLE [dbo].[Deposit] (
-    [DepositID] int IDENTITY(1,1) NOT NULL,
-    [TransactionID] int  NOT NULL,
-    [Amount] money  NOT NULL
+	[DepositID] int IDENTITY(1,1) NOT NULL,
+	[TransactionID] int  NOT NULL,
+	[Amount] money  NOT NULL
 );
 GO
 
 -- Creating table 'Withdrawl'
 CREATE TABLE [dbo].[Withdrawal] (
-    [WithdrawalID] int IDENTITY(1,1) NOT NULL,
-    [TransactionID] int  NOT NULL,
-    [Amount] money NOT NULL
+	[WithdrawalID] int IDENTITY(1,1) NOT NULL,
+	[TransactionID] int  NOT NULL,
+	[Amount] money NOT NULL
 );
 GO
 
@@ -79,31 +80,31 @@ GO
 -- Creating primary key on [AccountID] in table 'Account'
 ALTER TABLE [dbo].[Account]
 ADD CONSTRAINT [PK_Account]
-    PRIMARY KEY CLUSTERED ([AccountID] ASC);
+	PRIMARY KEY CLUSTERED ([AccountID] ASC);
 GO
 
 -- Creating primary key on [CustomerID] in table 'Customer'
 ALTER TABLE [dbo].[Customer]
 ADD CONSTRAINT [PK_Customer]
-    PRIMARY KEY CLUSTERED ([CustomerID] ASC);
+	PRIMARY KEY CLUSTERED ([CustomerID] ASC);
 GO
 
 -- Creating primary key on [DepositID] in table 'Deposit'
 ALTER TABLE [dbo].[Deposit]
 ADD CONSTRAINT [PK_Deposit]
-    PRIMARY KEY CLUSTERED ([DepositID] ASC);
+	PRIMARY KEY CLUSTERED ([DepositID] ASC);
 GO
 
 -- Creating primary key on [TransactionID] in table 'Transaction'
 ALTER TABLE [dbo].[Transaction]
 ADD CONSTRAINT [PK_Transaction]
-    PRIMARY KEY CLUSTERED ([TransactionID] ASC);
+	PRIMARY KEY CLUSTERED ([TransactionID] ASC);
 GO
 
 -- Creating primary key on [WithdrawalID] in table 'Withdrawl'
 ALTER TABLE [dbo].[Withdrawal]
 ADD CONSTRAINT [PK_Withdrawal]
-    PRIMARY KEY CLUSTERED ([WithdrawalID] ASC);
+	PRIMARY KEY CLUSTERED ([WithdrawalID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -113,61 +114,61 @@ GO
 -- Creating foreign key on [CustomerID] in table 'Account'
 ALTER TABLE [dbo].[Account]
 ADD CONSTRAINT [FK_dbo_Account_dbo_Customer_CustomerID]
-    FOREIGN KEY ([CustomerID])
-    REFERENCES [dbo].[Customer]
-        ([CustomerID])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+	FOREIGN KEY ([CustomerID])
+	REFERENCES [dbo].[Customer]
+		([CustomerID])
+	ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_dbo_Accounts_dbo_Customer_CustomerID'
 CREATE INDEX [IX_FK_dbo_Account_dbo_Customer_CustomerID]
 ON [dbo].[Account]
-    ([CustomerID]);
+	([CustomerID]);
 GO
 
 -- Creating foreign key on [AccountID] in table 'Transactions'
 ALTER TABLE [dbo].[Transaction]
 ADD CONSTRAINT [FK_dbo_Transaction_dbo_Account_AccountID]
-    FOREIGN KEY ([AccountID])
-    REFERENCES [dbo].[Account]
-        ([AccountID])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+	FOREIGN KEY ([AccountID])
+	REFERENCES [dbo].[Account]
+		([AccountID])
+	ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_dbo_Transactions_dbo_Accounts_AccountID'
 CREATE INDEX [IX_FK_dbo_Transaction_dbo_Account_AccountID]
 ON [dbo].[Transaction]
-    ([AccountID]);
+	([AccountID]);
 GO
 
 -- Creating foreign key on [TransactionID] in table 'Deposits'
 ALTER TABLE [dbo].[Deposit]
 ADD CONSTRAINT [FK_dbo_Deposit_dbo_Transaction]
-    FOREIGN KEY ([TransactionID])
-    REFERENCES [dbo].[Transaction]
-        ([TransactionID])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+	FOREIGN KEY ([TransactionID])
+	REFERENCES [dbo].[Transaction]
+		([TransactionID])
+	ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_dbo_Deposits_dbo_Transactions'
 CREATE INDEX [IX_FK_dbo_Deposit_dbo_Transaction]
 ON [dbo].[Deposit]
-    ([TransactionID]);
+	([TransactionID]);
 GO
 
 -- Creating foreign key on [TransactionID] in table 'Withdrawls'
 ALTER TABLE [dbo].[Withdrawal]
 ADD CONSTRAINT [FK_dbo_Withdrawal_dbo_Transaction]
-    FOREIGN KEY ([TransactionID])
-    REFERENCES [dbo].[Transaction]
-        ([TransactionID])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+	FOREIGN KEY ([TransactionID])
+	REFERENCES [dbo].[Transaction]
+		([TransactionID])
+	ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_dbo_Withdrawals_dbo_Transactions'
 CREATE INDEX [IX_FK_dbo_Withdrawal_dbo_Transaction]
 ON [dbo].[Withdrawal]
-    ([TransactionID]);
+	([TransactionID]);
 GO
 
 -- --------------------------------------------------

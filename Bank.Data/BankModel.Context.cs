@@ -13,10 +13,10 @@ namespace Bank.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BankDBContext : DbContext
+    public partial class BankEntities : DbContext
     {
-        public BankDBContext()
-            : base("name=BankDBContext")
+        public BankEntities()
+            : base("name=BankEntities")
         {
         }
     

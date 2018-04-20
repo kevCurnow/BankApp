@@ -21,6 +21,7 @@ namespace Bank.Data
         }
     
         public int CustomerID { get; set; }
+        public Nullable<int> SocialSecurityNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public System.DateTimeOffset CreatedUtc { get; set; }

@@ -13,6 +13,10 @@ namespace Bank.Models.Account_Models
         public string AccountNumber { get; set; }
         [Required]
         public string Pin { get; set; }
+
+        [Required]
+        public int CustomerId { get; set; }
+
         public int AccountType { get; set; }
         public decimal Balance { get; set; }
     }

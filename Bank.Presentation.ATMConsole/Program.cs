@@ -10,6 +10,7 @@ namespace Bank.Presentation.ATMConsole
     {
         static void Main(string[] args)
         {
+            BankController.RunATM();
         }
     }
 }
